@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { EditContact } from "./views/editContact.js";
 
 // import ScrollToTop from "./component/scrollToTop";
 
@@ -18,7 +19,7 @@ export const Layout = () => {
 						<Route exact path="/" component={Contacts} />
 						<Route exact path="/contacts" component={Contacts} />
 						<Route exact path="/add" component={AddContact} />
-						<Route exact path="/edit" component={AddContact} />
+						<Route exact path="/edit/:id" component={EditContact} />
 						<Route render={() => <h1 className="notfound">Not found!</h1>} />
 					</Switch>
 				</div>
