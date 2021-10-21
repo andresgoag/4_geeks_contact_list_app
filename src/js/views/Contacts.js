@@ -7,8 +7,6 @@ import { Modal } from "../component/Modal";
 import { Context } from "../store/appContext.js";
 
 export const Contacts = () => {
-	console.log("contacts");
-
 	const { store, actions } = React.useContext(Context);
 
 	const [state, setState] = React.useState({

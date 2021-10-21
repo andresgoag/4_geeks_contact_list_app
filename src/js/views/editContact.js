@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const EditContact = props => {
-	console.log(actualContact);
-
 	const { store, actions } = React.useContext(Context);
 
 	const actualContact = store.contacts.find(contact => contact.id === props.match.params.id);
