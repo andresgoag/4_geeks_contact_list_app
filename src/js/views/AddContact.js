@@ -5,6 +5,7 @@ import { agenda_slug } from "../store/flux";
 import { Context } from "../store/appContext";
 
 export const AddContact = props => {
+	console.log("add contact");
 	const [fullName, setFullName] = React.useState(props.fullName);
 	const [email, setEmail] = React.useState(props.email);
 	const [phone, setPhone] = React.useState(props.phone);

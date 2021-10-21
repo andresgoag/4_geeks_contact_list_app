@@ -30,13 +30,40 @@ const getState = ({ getStore, setStore }) => {
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(contact)
 				})
-					.then(response => response.json())
-					.then(data => console.log("Success:", data))
+					.then(response => {
+						if (response.ok) {
+							fetch(`${URL_API}/agenda/${agenda_slug}`)
+								.then(response => {
+									if (response.ok) {
+										return response.json();
+									} else {
+										return new Error("Error fetching the api");
+									}
+								})
+								.then(data => setStore({ contacts: data }))
+								.catch(error => console.error(error));
+						}
+					})
 					.catch(error => console.error("Error:", error));
 			},
 
 			deleteContact: contactId => {
-				fetch(`${URL_API}/${contactId}`, { method: "DELETE" });
+				fetch(`${URL_API}/${contactId}`, { method: "DELETE" })
+					.then(response => {
+						if (response.ok) {
+							fetch(`${URL_API}/agenda/${agenda_slug}`)
+								.then(response => {
+									if (response.ok) {
+										return response.json();
+									} else {
+										return new Error("Error fetching the api");
+									}
+								})
+								.then(data => setStore({ contacts: data }))
+								.catch(error => console.error(error));
+						}
+					})
+					.catch(error => console.error(error));
 			},
 
 			editContact: contact => {
@@ -45,8 +72,20 @@ const getState = ({ getStore, setStore }) => {
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(contact)
 				})
-					.then(response => response.json())
-					.then(data => console.log("Success:", data))
+					.then(response => {
+						if (response.ok) {
+							fetch(`${URL_API}/agenda/${agenda_slug}`)
+								.then(response => {
+									if (response.ok) {
+										return response.json();
+									} else {
+										return new Error("Error fetching the api");
+									}
+								})
+								.then(data => setStore({ contacts: data }))
+								.catch(error => console.error(error));
+						}
+					})
 					.catch(error => console.error("Error:", error));
 			}
 		}
