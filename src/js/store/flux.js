@@ -1,18 +1,16 @@
-const URL_API = "https://assets.breatheco.de/apis/fake/contact";
-export const agenda_slug = "andresgoag";
-
 const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
 			//Your data structures, A.K.A Entities
-			contacts: []
+			contacts: [],
+			URL_API: "https://3000-teal-mite-5r8l98ea.ws-us18.gitpod.io"
 		},
 		actions: {
 			//(Arrow) Functions that update the Store
 			// Remember to use the scope: scope.state.store & scope.setState()
 
 			getContacts: () => {
-				fetch(`${URL_API}/agenda/${agenda_slug}`)
+				fetch(`${getStore().URL_API}/contact/all`)
 					.then(response => {
 						if (response.ok) {
 							return response.json();
@@ -25,14 +23,14 @@ const getState = ({ getStore, setStore }) => {
 			},
 
 			addContact: contact => {
-				fetch(`${URL_API}/`, {
+				fetch(`${getStore().URL_API}/contact`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(contact)
 				})
 					.then(response => {
 						if (response.ok) {
-							fetch(`${URL_API}/agenda/${agenda_slug}`)
+							fetch(`${getStore().URL_API}/contact/all`)
 								.then(response => {
 									if (response.ok) {
 										return response.json();
@@ -48,10 +46,10 @@ const getState = ({ getStore, setStore }) => {
 			},
 
 			deleteContact: contactId => {
-				fetch(`${URL_API}/${contactId}`, { method: "DELETE" })
+				fetch(`${getStore().URL_API}/contact/${contactId}`, { method: "DELETE" })
 					.then(response => {
 						if (response.ok) {
-							fetch(`${URL_API}/agenda/${agenda_slug}`)
+							fetch(`${getStore().URL_API}/contact/all`)
 								.then(response => {
 									if (response.ok) {
 										return response.json();
@@ -67,14 +65,14 @@ const getState = ({ getStore, setStore }) => {
 			},
 
 			editContact: contact => {
-				fetch(`${URL_API}/${contact.id}`, {
+				fetch(`${getStore().URL_API}/contact/${contact.id}`, {
 					method: "PUT",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(contact)
 				})
 					.then(response => {
 						if (response.ok) {
-							fetch(`${URL_API}/agenda/${agenda_slug}`)
+							fetch(`${getStore().URL_API}/contact/all`)
 								.then(response => {
 									if (response.ok) {
 										return response.json();

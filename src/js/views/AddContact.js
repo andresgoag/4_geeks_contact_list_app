@@ -1,7 +1,6 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 import { Link } from "react-router-dom";
-import { agenda_slug } from "../store/flux";
 import { Context } from "../store/appContext";
 
 export const AddContact = props => {
@@ -14,7 +13,6 @@ export const AddContact = props => {
 
 	const saveAction = () => {
 		const contact = {
-			agenda_slug: agenda_slug,
 			full_name: fullName,
 			email: email,
 			phone: phone,
